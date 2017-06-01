@@ -1,3 +1,8 @@
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Main {
@@ -6,8 +11,11 @@ public class Main {
 		JFrame window = new JFrame();
 		window.setTitle("Chess");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(50 * 8 + 16, 50 * 9 - 11);
-		window.add(new BoardComponent(ChessBoard.initGame()));
+		BoardComponent board = new BoardComponent(ChessBoard.initGame());
+		board.setLocation(30,30);
+		window.getContentPane().add(board);
+		window.setResizable(false);
+		window.pack();
 		window.setVisible(true);
 	}
 
