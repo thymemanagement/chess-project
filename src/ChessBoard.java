@@ -11,6 +11,7 @@ public class ChessBoard {
 	private boolean getPiece;
 	private boolean gameOver;
 	private Team currentTurn;
+	private Team loser;
 	private King whiteKing;
 	private King blackKing;
 	private int turnCount;
@@ -24,6 +25,7 @@ public class ChessBoard {
 		getPiece = true;
 		gameOver = false;
 		currentTurn = Team.WHITE;
+		loser = null;
 		turnCount = 1;
 	}
 	
@@ -81,11 +83,7 @@ public class ChessBoard {
 					if (noPossibleMoves()) {
 						gameOver = true;
 						if (inCheck(currentTurn, getKing(currentTurn).getPos())) {
-							if (currentTurn == Team.WHITE) {
-								System.out.println("Checkmate. Black Wins!");
-							} else {
-								System.out.println("Checkmate. White Wins!");
-							}
+							loser = currentTurn;
 						} else {
 							System.out.println("It's a Stalemate!");
 						}
@@ -95,6 +93,24 @@ public class ChessBoard {
 				} else if (currentPiece.getPos().equals(pos)) {
 					getPiece = true;
 				}
+			}
+		}
+	}
+	
+	public String getMessage() {
+		if (gameOver) {
+			if (loser == Team.WHITE) {
+				return "Checkmate! Black Wins!";
+			} else if (loser == Team.BLACK) {
+				return "Checkmate! White Wins!";
+			} else {
+				return "Stalemate! How Unfortunate.";
+			}
+		} else {
+			if (currentTurn == Team.WHITE) {
+				return "White's Turn";
+			} else {
+				return "Black's Turn";
 			}
 		}
 	}

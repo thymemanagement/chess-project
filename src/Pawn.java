@@ -1,5 +1,4 @@
 import java.awt.Image;
-import java.util.ArrayList;
 
 public class Pawn extends ChessPiece {
 	
